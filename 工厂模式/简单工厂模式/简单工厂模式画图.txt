@@ -1,0 +1,58 @@
+<?php
+declare(strict_types=1);
+
+interface IShape
+{
+    public function draw();
+}
+
+class Circle implements IShape
+{
+    public function draw()
+    {
+        return '画一个圆形';
+    }
+}
+
+class Square implements IShape
+{
+    public function draw()
+    {
+        return '画一个正方形';
+    }
+}
+
+class ShapeFactory
+{
+
+    const CIRCLE = 'circle';
+    const SQUARE = 'square';
+    const RECTANGLE = 'rectangle';
+
+    private $shape;
+
+    public function __construct($shape)
+    {
+        $this->shape = $shape;
+    }
+
+    public function getShape()
+    {
+        switch ($this->shape) {
+            case self::CIRCLE:
+                return new Circle();
+                break;
+            case self::SQUARE:
+                return new Square();
+                break;
+            case self::RECTANGLE:
+                return new Rectangle();
+                break;
+            default:
+                return null;
+        }
+    }
+}
+$shape = (new ShapeFactory(ShapeFactory::CIRCLE))->getShape();
+$sting = $shape->draw();
+echo $sting;

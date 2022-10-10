@@ -1,0 +1,60 @@
+<?php
+declare(strict_types=1);
+
+namespace a;
+
+interface Shape
+{
+    public function draw();
+}
+class Circle implements Shape
+{
+    public function draw()
+    {
+        print_r("Shape: Circle" );
+    }
+}
+class Rectangle implements Shape
+{
+    public function draw()
+    {
+        print_r("Shape: Rectangle");
+    }
+}
+abstract class ShapeDecorator implements Shape
+{
+    protected $decoratorShape;
+
+    public function __construct(Shape $shape)
+    {
+        $this->decoratorShape = $shape;
+    }
+
+    public function draw()
+    {
+        $this->decoratorShape->draw();
+    }
+}
+
+class RedShapeDecorator extends ShapeDecorator{
+
+    public function __construct(Shape $shape)
+    {
+        parent::__construct($shape);
+    }
+
+    public function draw()
+    {
+        $this->decoratorShape->draw();
+        $this->setRedColor($this->decoratorShape);
+    }
+
+    private function setRedColor(Shape $shape)
+    {
+        print_r("redssssss");
+    }
+}
+
+
+$redCircle = new RedShapeDecorator(new Circle());
+$redCircle->draw();

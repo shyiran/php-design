@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+namespace index;
+class Signleton{
+    private static $_instanse = null;
+    //私有化构造方法 防止外界使用new实例化对象
+    private function __construct()   {   }
+    private function __clone()   {   }
+    static function getInstance(){
+        if(is_null(self::$_instanse) || !isset(self::$_instanse)){
+            self::$_instanse=new self();
+        }
+        return self::$_instanse;
+    }
+    public function say(){
+        echo "i am signleton";
+    }
+}
+$s=Signleton::getInstance();
+$s->say();

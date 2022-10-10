@@ -1,0 +1,33 @@
+﻿declare(strict_types=1);
+namespace Factory\SimpleFactory;
+
+
+class SimpleFactory
+{
+    public function createProduction(): Production
+    {
+        return new Production();
+    }
+}
+
+class Production
+{
+    public function getPrice(int $price)
+    {
+        return $price * 2;
+    }
+}
+
+class Test
+{
+    public function __construct()
+    {
+        $factory = new SimpleFactory();
+        $production = $factory->createProduction();
+
+        if ($production instanceof Production) {
+            echo 'Nice';
+        }
+    }
+}
+new Test();
